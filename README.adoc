@@ -1,9 +1,7 @@
 
-## Quarkus Brings Serverless to Java Developers Demo
+# Quarkus Brings Serverless to Java Developers Demo
 
 This is the source codes for the Quarkus with Serverless Demo.
-
----
 
 === 1. Run a RESTful API application via Quarkus Development Mode
 
@@ -147,7 +145,7 @@ mvn clean install -DskipTests azure-functions:deploy
 
 Once you login Azure Portal then you will see _quarkus_function_ in _Function App_ on the left menu.
 
-#### Appendix
+#### More Guides
 
  * https://access.redhat.com/documentation/en-us/openshift_container_platform/4.2/html/serverless_applications/installing-openshift-serverless[Installing OpenShift Serverless^]
 

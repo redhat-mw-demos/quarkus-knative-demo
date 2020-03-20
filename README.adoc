@@ -91,7 +91,7 @@ Run the executable file:
 
 [source,sh,role="copypaste"]
 ----
-java -jar target/quarkus-serverless-1.0-SNAPSHOT-runner.jar
+target/quarkus-serverless-1.0-SNAPSHOT-runner
 ----
 
 *Fantastic!* It only takes `0.594s` to start up and this is the reason why you're saying that Quarks fits in serverless application.

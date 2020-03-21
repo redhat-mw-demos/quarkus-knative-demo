@@ -116,7 +116,7 @@ danielon30/quarkus-serverless:latest
 
 You wil see that Quarkus application is up in 60 secs. When you go to the logs in Pod, you will see 10~15 millisecs to start Quarkus.
 
-=== 5. Deplooy the app to Azure Function
+=== 5. Deploy the app to Azure Function
 
 Let's go back to your IDE and open _pom.xml_ to uncomment the following dependency:
 

@@ -1,7 +1,7 @@
 
 # Quarkus Brings Serverless to Java Developers Demo
 
-This is the source codes for the Quarkus with Serverless Demo.
+This is the source codes for the Quarkus(RHBQ) with Serverless Demo.
 
 === 1. Run a RESTful API application via Quarkus Development Mode
 
@@ -9,16 +9,20 @@ Copy and paste the following commands in _Terminal_:
 
 [source,sh,role="copypaste"]
 ----
-mvn compile quarkus:dev
+mvn quarkus:dev
 ----
 
 You will see that *Quarkus* is ruuning as below:
 
 [source,sh]
 ----
-2020-03-17 12:48:42,910 INFO  [io.quarkus] (main) quarkus-serverless 1.0-SNAPSHOT (running on Quarkus 1.2.1.Final) started in 1.675s. Listening on: http://0.0.0.0:8080
-2020-03-17 12:48:42,938 INFO  [io.quarkus] (main) Profile dev activated. Live Coding activated.
-2020-03-17 12:48:42,938 INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]
+__  ____  __  _____   ___  __ ____  ______ 
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2020-06-30 10:39:08,053 INFO  [io.quarkus] (main) quarkus-serverless 1.0-SNAPSHOT (powered by Quarkus xx.xx.xx) started in 0.936s. Listening on: http://0.0.0.0:8080
+2020-06-30 10:39:08,056 INFO  [io.quarkus] (main) Profile dev activated. Live Coding activated.
+2020-06-30 10:39:08,056 INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]
 ----
 
 Access the endpoint via web browser or curl command:
@@ -64,7 +68,7 @@ Stop the running Quarkus runtime in your local.
 
 === 3. Package the application
 
-Package the application via *Uber Jar*:
+Package the application via *Thin Jar*:
 
 [source,sh,role="copypaste"]
 ----
@@ -124,10 +128,48 @@ Let's go back to your IDE and open _pom.xml_ to uncomment the following dependen
 ----
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-funqy-http</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-azure-functions-http</artifactId>
-      <version>${quarkus.version}</version>
     </dependency>
 ----
+
+And comment resteay dependency and instead, we will use funqy extension:
+
+[source,xml,role="copypaste"]
+----
+    <!-- <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy</artifactId>
+    </dependency> -->
+----
+
+Add root path in application.properties:
+
+[source,xml,role="copypaste"]
+----
+quarkus.http.root-path=/api
+----
+
+Lastly, replace GreetingResource.java with the following codes to use *@Funq@ instead RestEasy functions:
+
+[source,java,role="copypaste"]
+----
+package com.redhat.serverless.quickstart;
+
+import io.quarkus.funqy.Funq;
+
+public class GreetingResource {
+
+    @Funq
+    public String hello() {
+        return "Welcome, Quarkus with Serverless!";
+    }
+}
+----
+
 
 Make sure to login Azure Cloud with your own credential:
 
@@ -144,6 +186,8 @@ mvn clean install -DskipTests azure-functions:deploy
 ----
 
 Once you login Azure Portal then you will see _quarkus_function_ in _Function App_ on the left menu.
+
+The endpoint should be ended with */api/hello*
 
 #### More Guides
 
